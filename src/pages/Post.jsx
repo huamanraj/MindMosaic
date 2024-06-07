@@ -60,7 +60,7 @@ export default function Post() {
                     )}
                 </div>
                 
-                <div className="browser-css text-2xl  ">
+                <div className="browser-css text-xl  ">
                     {parse(post.content)}
                     </div>
             </Container>

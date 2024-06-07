@@ -43,7 +43,10 @@ export default function RTE({name, control, label, defaultValue =""}) {
             ],
             toolbar:
             "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
-            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            selector: 'textarea',  // change this value according to your HTML
+            skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
+            content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default')
         }}
         onEditorChange={onChange}
         />

@@ -71,18 +71,18 @@ export default function PostForm({ post }) {
     }, [watch, slugTransform, setValue]);
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-            <div className="w-2/3 px-2">
+        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap sm:flex-row flex-col ">
+            <div className="w-2/3 px-5 text-[#eeecec] text-lg font-bold ">
                 <Input
                     label="Title :"
                     placeholder="Title"
-                    className="mb-4"
+                    className="mb-4 font-normal bg-[#222f3e]  text-[#efefef] focus:bg-[#222f3e] focus:text-[#efefef]"
                     {...register("title", { required: true })}
                 />
                 <Input
                     label="Slug :"
                     placeholder="Slug"
-                    className="mb-4"
+                    className="mb-4 font-normal italic bg-[#222f3e]  text-[#efefef] focus:bg-[#222f3e] focus:text-[#efefef]"
                     {...register("slug", { required: true })}
                     onInput={(e) => {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
@@ -90,11 +90,11 @@ export default function PostForm({ post }) {
                 />
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
-            <div className="w-1/3 px-2">
+            <div className="w-1/3 px-2  ">
                 <Input
                     label="Featured Image :"
                     type="file"
-                    className="mb-4"
+                    className="mb-4 bg-[#222f3e]  text-[#efefef] focus:bg-[#222f3e] focus:text-[#efefef]"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
                 />
@@ -110,12 +110,16 @@ export default function PostForm({ post }) {
                 <Select
                     options={["active", "inactive"]}
                     label="Status"
-                    className="mb-4"
+                    className="mb-4 bg-[#222f3e]  text-[#efefef] focus:bg-[#222f3e] focus:text-[#efefef]"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <div className="flex justify-center ">
+                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-1/3 hover:bg-green-800 ease-in-out transition-all">
                     {post ? "Update" : "Submit"}
                 </Button>
+                </div>
+            
+                
             </div>
         </form>
     );
