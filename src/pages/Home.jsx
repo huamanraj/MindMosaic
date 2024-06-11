@@ -19,8 +19,8 @@ function Home() {
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read posts
+                            <h1 className="text-2xl font-bold text-gray-300 hover:text-gray-500">
+                                No Blogs Found Write a new one!!
                             </h1>
                         </div>
                     </div>
@@ -29,9 +29,9 @@ function Home() {
         )
     }
     return (
-        <div className='w-full py-8'>
+        <div className='w-full py-8 '>
             <Container>
-                <div className='flex flex-wrap'>
+                <div className='flex flex-wrap justify-center'>
                     {posts.map((post) => (
                         <div key={post.$id} className='p-3 w-auto '>
                             <PostCard {...post} /> 
