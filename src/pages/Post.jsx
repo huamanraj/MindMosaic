@@ -4,35 +4,53 @@ import appwriteService from "../appwrite/config";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import Modal from "../components/Modal";
+import Loader from "../components/Loader/Loader";
+
 
 export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
-
+    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [loader, setLoader] = useState(false);
     const userData = useSelector((state) => state.auth.userData);
 
     const isAuthor = post && userData ? post.userId === userData.$id : false;
 
     useEffect(() => {
+        setLoader(true);
         if (slug) {
             appwriteService.getPost(slug).then((post) => {
-                if (post) setPost(post);
+                if (post) {
+                    setPost(post);
+                    setLoader(false);
+                } 
                 else navigate("/");
+                
             });
         } else navigate("/");
     }, [slug, navigate]);
+    
+    const handleDelete = () => {
+        setIsModalOpen(true);
+    };
 
-    const deletePost = () => {
+    const handleConfirmDelete = () => {
+        setLoader(true)
         appwriteService.deletePost(post.$id).then((status) => {
             if (status) {
                 appwriteService.deleteFile(post.featuredImage);
                 navigate("/");
+                setLoader(false)
             }
         });
+        setIsModalOpen(false);
     };
 
     return post ? ( 
+        <>
+        {loader?(<Loader/>):(
         <div className="py-8 bg-[#020617] text-[#fafafa] justify-center content-center px-80 text-lg">
             <Container>
                 <div className="w-full mb-6">
@@ -53,9 +71,21 @@ export default function Post() {
                                     Edit
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
+                            <Button bgColor="bg-red-600" onClick={handleDelete}>
                                 Delete
-                            </Button>
+                            </Button>  
+                            <Modal
+                                isOpen={isModalOpen}
+                                onClose={() => setIsModalOpen(false)}
+                                onConfirm={handleConfirmDelete}
+                                title="Confirm Deletion"
+                                
+                            > 
+                            <p className="text-sm ">Are you sure?<br /> 
+                            <span className="text-red-400 italic">can't be restored once deleted</span>
+                            </p>
+                            </Modal>
+                            
                         </div>
                     )}
                 </div>
@@ -65,5 +95,7 @@ export default function Post() {
                     </div>
             </Container>
         </div>
+        )}
+        </>
     ) : null;
 }
