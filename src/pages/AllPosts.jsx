@@ -11,7 +11,7 @@ function AllPosts() {
 
     useEffect(() => {
     setLoader(true);
-    console.log(setLoader);
+    
     appwriteService.getPosts([]).then((posts) => {
       if (posts) {
         
@@ -24,14 +24,14 @@ function AllPosts() {
   return (
     <div className='w-screen py-8'>
         <Container>
-            <div className="flex flex-wrap ">
+            <div className="flex flex-wrap flex-row px-5 justify-center ">
           {loader ? (
             <Loader />
           ) : (
             posts.map((post) => (
               <div
                 key={post.$id}
-                className=" p-2 w-full sm:w-1/2 md:w-1/3  lg:w-1/4"
+                className=" p-3 w-auto "
               >
                 <PostCard {...post} />
               </div>

@@ -51,7 +51,7 @@ export default function Post() {
     return post ? ( 
         <>
         {loader?(<Loader/>):(
-        <div className="py-8 bg-[#020617] text-[#fafafa] justify-center content-center px-80 text-lg">
+        <div className="py-8 bg-[#020617] text-[#fafafa] justify-center content-center sm:px-80 px-5 text-lg">
             <Container>
                 <div className="w-full mb-6">
                     <h1 className="text-5xl font-bold">{post.title}</h1>
@@ -67,11 +67,12 @@ export default function Post() {
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
+                                <Button bgColor="bg-green-500" className="mr-3 text-xs">
                                     Edit
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-600" onClick={handleDelete}>
+                            <Button bgColor="bg-red-600" onClick={handleDelete}
+                            className="text-xs">
                                 Delete
                             </Button>  
                             <Modal

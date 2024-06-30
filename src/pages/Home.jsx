@@ -20,7 +20,7 @@ function Home() {
     }, []);
 
     return (
-        <div className="w-full py-8">
+        <div className="w-screen py-8">
             <Container>
                 {loader ? (
                     <Loader />
@@ -28,7 +28,7 @@ function Home() {
                     posts.length === 0 ? (
                         <div className="w-full py-8 mt-4 text-center">
                             <div className="flex flex-wrap">
-                                <div className="p-2 w-full">
+                                <div className=" w-full">
                                     <h1 className="text-2xl font-bold text-gray-300 hover:text-gray-500">
                                         No Blogs Found. Create a new one!
                                     </h1>
